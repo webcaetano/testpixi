@@ -21,7 +21,15 @@ PIXI.loader.add('bunny', 'images/phaser-dude.png').load(function (loader, resour
 	var colorMatrix = new PIXI.filters.ColorMatrixFilter();
 	blurFilter.blur = 10;
 
+	colorMatrix.maxtrix = [
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	]
 
+	// colorMatrix.desaturate(100);
+	colorMatrix.brightness(1, false);
 
 	// Setup the position and scale of the bunny
 	bunny.position.x = 400;
@@ -32,12 +40,9 @@ PIXI.loader.add('bunny', 'images/phaser-dude.png').load(function (loader, resour
 
 	bunny.filters = [colorMatrix];
 
-	colorMatrix.contrast(20);
 
 	// Add the bunny to the scene we are building.
 	stage.addChild(bunny);
-
-	console.log(bunny)
 
 	animate();
 });
@@ -46,6 +51,6 @@ PIXI.loader.add('bunny', 'images/phaser-dude.png').load(function (loader, resour
 function animate() {
 	bunny.rotation -= 0.01;
 
-	renderer.render(stage);
 	requestAnimationFrame(animate);
+	renderer.render(stage);
 }
